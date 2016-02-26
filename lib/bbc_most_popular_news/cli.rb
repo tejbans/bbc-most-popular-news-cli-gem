@@ -12,7 +12,7 @@ class CommandLineInteface
   end
 
   def make_news
-    news_array = Scraper.collect(BASE_URL)
+    news_array = Scraper.mainpage(BASE_URL)
     BbcMpNews.create_from_collection(news_array)
   end
 
@@ -33,12 +33,11 @@ class CommandLineInteface
         puts "#{newsitem.rank}.".rjust(3) + "  #{newsitem.headline}"
         end
         puts ""
-        puts "Enter the rank number for more details or type 'exit'.".colorize(:light_blue)
-        puts "------------------------------------------------------"
+        print "Enter the rank number for more details or type 'exit':".colorize(:light_blue)
         input = gets.strip
           if input.to_i.between?(1,10)
             display_details(input)
-            puts "Press return to see the list again or enter 'exit'.".colorize(:light_blue)
+            puts "Press return to see the list again or type 'exit'.".colorize(:light_blue)
             input = gets.strip
           end
       end
@@ -46,7 +45,7 @@ class CommandLineInteface
 
   def display_details(rank)
     newsobject = BbcMpNews.all.detect { |news| news.rank == rank}
-    puts newsobject.headline.colorize(:green).bold
+    puts newsobject.headline.colorize(:green).underline
     puts
     newsobject.details.each do |detail|
     puts detail

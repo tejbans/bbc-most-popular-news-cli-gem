@@ -4,7 +4,7 @@ require 'pry'
 
 class Scraper
 
-  def self.collect(url)
+  def self.mainpage(url)
     page = Nokogiri::HTML(open(url))
     news =[]
     page.css("li.most-popular-page-list-item").each do |li|
