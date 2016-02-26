@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require "./lib/bbc_most_popular_news"
+
+
+CommandLineInteface.new.run
